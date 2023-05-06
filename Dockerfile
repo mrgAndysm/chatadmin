@@ -19,6 +19,7 @@ FROM scratch
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/Shanghai
+COPY config.yaml /app/config.yaml
 ENV TZ Asia/Shanghai
 
 WORKDIR /app
