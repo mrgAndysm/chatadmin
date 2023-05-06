@@ -1,0 +1,11 @@
+# gpt config
+System:
+  OpenAIKey: ""
+  Address: ":3003"
+  AuthSecretKey: ""
+  HttpsProxy: ""
+  ReverseProxy: ""
+  SocksHost: ""
+  SocksPort: ""
+  OpenAPIBaseURL: ""
+  DatabasePath: ""
