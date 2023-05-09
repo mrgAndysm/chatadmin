@@ -1,0 +1,18 @@
+# gpt config
+System:
+  OpenAIKey: "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"
+  Address: ":3003"
+  AuthSecretKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODExOTY3NDksImlhdCI6MTY4MTExMDM0OSwibmJmIjoxNjgxMTEwMzQ5LCJzdWIiOiI0NTU2MzYxOTA2NzUwODk0MDkscGdtYW4sMSJ9.Q5UyvxEouDY8c6DX9OF1wVIXpX3vhHhiHQdy39NXnqU"
+  HttpsProxy: ""
+  ReverseProxy: ""
+  SocksHost: ""
+  SocksPort: ""
+  OpenAPIBaseURL: ""
+  DatabasePath: ""
+# redis
+Redis:
+  Addr: 104.168.143.16:6379
+  Password: pgman.redis
+# mysql
+Mysql:
+  DataSource: root:doson.123@tcp(192.168.0.170:3306)/pgman?charset=utf8mb4&parseTime=True&loc=Local
