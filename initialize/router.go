@@ -1,11 +1,9 @@
 package initialize
 
 import (
-	"chatgpt-go/html"
 	"chatgpt-go/middleware"
 	"chatgpt-go/routes"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Routers() *gin.Engine {
@@ -31,9 +29,16 @@ func Routers() *gin.Engine {
 		api.POST("/config", routes.GetConfig)
 		api.POST("/session", routes.SessionEndpoint)
 		api.POST("/verify", routes.VerifyEndpoint)
+
+		sysApi := api.Group("sys")
+		{
+			sysApi.POST("/key/add", routes.AddKey)
+			//sysApi.DELETE("/key/del", routes.DelKey)
+			sysApi.POST("/key/list", routes.KeyList)
+		}
 	}
 
-	r.StaticFS("/", http.FS(html.Static))
+	//r.StaticFS("/", http.FS(html.Static))
 
 	return r
 }

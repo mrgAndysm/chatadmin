@@ -14,6 +14,7 @@ import (
 )
 
 func RunServer() {
+	initialize.InitRedis()
 
 	router := initialize.Routers()
 

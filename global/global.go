@@ -17,4 +17,11 @@ type SystemConfig struct {
 		OpenAPIBaseURL string
 		DatabasePath   string
 	}
+	Redis struct {
+		Addr     string
+		Password string
+	}
+	Mysql struct {
+		DataSource string
+	}
 }

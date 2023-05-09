@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"chatgpt-go/db"
 	"chatgpt-go/global"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -39,40 +40,29 @@ func isNotEmptyString(s string) bool {
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		authSecretKey := global.Config.System.AuthSecretKey
-		fmt.Println("dddddzz")
-		if isNotEmptyString(authSecretKey) {
-			authorization := c.Request.Header.Get("Authorization")
-			token := strings.TrimPrefix(authorization, "Bearer ")
-			fmt.Println("xxx", token)
-			if token == "" || token != authSecretKey {
-				response := struct {
-					Status  string      `json:"status"`
-					Message string      `json:"message"`
-					Data    interface{} `json:"data"`
-				}{
-					Status:  "Unauthorized",
-					Message: "Error: 无访问权限 | No access rights",
-					Data:    nil,
-				}
-				c.JSON(http.StatusUnauthorized, response)
-				c.Abort()
-				return
-			}
-			//if authorization == "" || strings.TrimSpace(strings.TrimPrefix(authorization, "Bearer ")) != strings.TrimSpace(authSecretKey) {
-			//	response := struct {
-			//		Status  string      `json:"status"`
-			//		Message string      `json:"message"`
-			//		Data    interface{} `json:"data"`
-			//	}{
-			//		Status:  "Unauthorized",
-			//		Message: "Error: 无访问权限 | No access rights",
-			//		Data:    nil,
-			//	}
-			//	c.JSON(http.StatusUnauthorized, response)
-			//	c.Abort()
-			//	return
-			//}
+		authorization := c.Request.Header.Get("Authorization")
+		token := strings.TrimPrefix(authorization, "Bearer ")
+
+		response := struct {
+			Status  string      `json:"status"`
+			Message string      `json:"message"`
+			Data    interface{} `json:"data"`
+		}{
+			Status:  "Unauthorized",
+			Message: "Error: 无访问权限 | No access rights",
+			Data:    nil,
+		}
+		if token == "" {
+			c.JSON(http.StatusUnauthorized, response)
+			c.Abort()
+			return
+		}
+		err := db.RedisDb.Get(token).Err()
+		if err != nil {
+			fmt.Println("redis-err:", err)
+			c.JSON(http.StatusUnauthorized, response)
+			c.Abort()
+			return
 		}
 
 		c.Next()
