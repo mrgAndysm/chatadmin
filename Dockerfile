@@ -21,7 +21,7 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifi
 COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/Shanghai
 COPY config.yaml /app/config.yaml
 ENV TZ Asia/Shanghai
-
+EXPOSE 3003
 WORKDIR /app
 COPY --from=builder /app/main /app/main
 
