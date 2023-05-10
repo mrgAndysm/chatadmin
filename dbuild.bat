@@ -1,8 +1,8 @@
 @echo off
 chcp 65001
 set docker_username="pgman"
-set /p docker_repo="请输入您要发布的Docker镜像仓库名称："
-set /p docker_tag="请输入您要发布的Docker镜像标签名称（默认为latest）:"
+set docker_repo="chat-admin"
+set docker_tag="latest"
 
 if "%docker_tag%" == "" (
     set docker_tag=latest

@@ -42,6 +42,10 @@ func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authorization := c.Request.Header.Get("Authorization")
 		token := strings.TrimPrefix(authorization, "Bearer ")
+		if global.Config.System.AuthSecretKey == token {
+			c.Next()
+			return
+		}
 
 		response := struct {
 			Status  string      `json:"status"`
