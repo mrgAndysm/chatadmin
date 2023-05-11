@@ -16,6 +16,7 @@ func Cross() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		//c.Writer.Header().Set("Proxy-Connection", "keep-alive")
 
 		// 处理 OPTIONS 请求
 		if c.Request.Method == "OPTIONS" {

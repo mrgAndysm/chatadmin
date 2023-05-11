@@ -2,7 +2,7 @@
 chcp 65001
 set docker_username="pgman"
 set docker_repo="chat-admin"
-set docker_tag="latest"
+set /p docker_tag="输入标签"
 
 if "%docker_tag%" == "" (
     set docker_tag=latest
