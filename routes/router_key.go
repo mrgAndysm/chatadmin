@@ -50,10 +50,14 @@ func KeyList(c *gin.Context) {
 	v := map[string]interface{}{}
 	re := []map[string]interface{}{}
 	for _, val := range vals {
+		var tmp = map[string]interface{}{}
 		json.Unmarshal([]byte(val), &v)
 		gptkey := v["gptkey"].(string)
-		v["gptkey"] = gptkey[:len(gptkey)-6] + "...."
-		re = append(re, v)
+		tmp["gptkey"] = val[:len(gptkey)-6] + "...."
+		tmp["user_name"] = v["user_name"]
+		tmp["exp_date"] = v["exp_date"]
+		tmp["phone"] = v["phone"]
+		re = append(re, tmp)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
